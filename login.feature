@@ -1,27 +1,23 @@
 #language: pt
 
 Funcionalidade: Login
-Como cliente da EBAC-SHOP
-Quero acessar a plataforma
-Para visualizar meus pedidos e realizar compras
+    Como cliente da EBAC-SHOP
+    Quero acessar a plataforma
+    Para visualizar meus pedidos e realizar compras
 
 Cenario: Login Valido
-Dado Que o usuario esta na tela de login
-Quando Informa um e-mail e senha válidos
-E clica no botão "Entrar"
-Entao o sistema deve autenticar o usuario
-E redirecioná-lo para a pagina inicial
+    Dado que o cliente está na tela de login
+    Quando informa usuário e senha válidos
+    Então deve ser direcionado para a tela de checkout
 
-Esquema do Cenario: Login Invalido
-Dado Que o usuario esta na tela de login
-Quando Informa um e-mail "<e-mail>" e a senha "<senha>"
-E clica no botão "Entrar"
-Entao o sistema deve exibir a mensagem "<mensagem>"
-E redirecioná-lo para tela de login
+Esquema do Cenário: Login inválido
+    Dado que o cliente está na tela de login
+    Quando informa "<usuario>" e "<senha>"
+    Então o sistema deve exibir a mensagem "Usuário ou senha inválidos"
 
 Exemplos:
-|e-mail|senha|mensagem|
-|teste@email.com.br|123|Senha Invalida|
-|      |12345678|E-mail obrigatorio|
-|teste@gemail.com.br|    |Senha obrigatoria|
-|teste@email.com.br|12345678|Senha Válida|
+|e-mail            |senha   |mensagem          |
+|teste@email.com.br|123     |Senha Invalida    |
+|                  |12345678|E-mail obrigatorio|
+|teste@email.com.br|        |Senha obrigatoria |
+|teste@email.com.br|12345678|Senha Válida      |

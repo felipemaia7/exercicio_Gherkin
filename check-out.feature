@@ -1,22 +1,29 @@
 #language: pt
 
-Funcionalidade: Finalizar Compra
-
+Funcionalidade: Cadastro para checkout
     Como cliente
-    Quero finalizar minha compra
+    Quero concluir meu cadastro
     Para receber meus produtos
 
-Cenario: Compra Finalizada com Sucesso
+Cenário: Cadastro realizado com sucesso
+    Dado que o cliente está na tela de cadastro
+    Quando preenche todos os campos obrigatórios
+    Então o cadastro deve ser realizado com sucess
+    E uma mensagem "Cadastro Concluido!" deve ser exibida
 
-    Dado que o usuario possui produtos no carrinho
-    E está autenticado
-    Quando informa os dados de pagamento 
-    E confirma compra
-    Então o pedido deve ser registrado
-    E uma mensagem "Compra Concluida!" deve ser exibida
+Esquema do Cenário: Validar formato do e-mail
+    Dado que o cliente está na tela de cadastro
+    Quando informa o e-mail "<email>"
+    Então o sistema deve exibir "<resultado>"
 
-Cenário: Tentativa de finalizar compra com carrinho vazio
-    Dado que o carrinho está vazio
-    Quando o usuário tenta finalizar a compra
-    Então o sistema deve impedir a finalização
-    E exibir a mensagem "Carrinho vazio"
+Exemplos:
+
+| email              | resultado                         |
+| cliente@email.com  | Cadastro permitido                |
+| clienteemail.com   | E-mail inválido                   |
+| cliente@           | E-mail inválido                   |
+
+Cenário: Campos obrigatórios não preenchidos
+    Dado que o cliente está na tela de cadastro
+    Quando tenta concluir o cadastro sem preencher os campos obrigatórios
+    Então o sistema deve exibir uma mensagem de alerta

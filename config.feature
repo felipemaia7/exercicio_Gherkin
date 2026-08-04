@@ -1,22 +1,30 @@
 #language: pt
 
-Funcionalidade: Configuração da Conta
+Funcionalidade: Configurar produto
 
-    Como usuario
-    Quero alterar minhas configurações
-    Para manter meus dados atualizados
+    Como cliente da EBAC-SHOP
+    Quero configurar meu produto
+    Para inseri-lo no carrinho
 
-Cenario: ALterar a senha com sucesso
+Cenário: Configurar produto com sucesso
 
-    Dado que o usuario esta autenticado
-    Quando informa a senha atual
-    E informa uma senha nova Válida
-    E confirma a alteração
-    Então o sistema deve atualizar a senha
-    E exibir uma mensagem "Senha Alterada com Sucesso!"
+    Dado que o cliente está na página do produto
+    Quando seleciona uma cor, um tamanho e uma quantidade de 2 unidades
+    Então o produto deve estar disponível para ser adicionado ao carrinho
+    E exibir uma mensagem "Produto configurado com Sucesso!"
 
-Cenário: Alterar senha com senha atual incorreta
-    Dado que o usuario esta autenticado
-    Quando informa a senha atual incorreta
-    E tenta salvar a alteração
-    Então exibir uma mensagem "Senha Atual Incorreta!"
+Esquema do Cenário: Validar quantidade de produtos
+    Dado que o cliente está configurando um produto
+    Quando informa a quantidade <quantidade>
+    Então o sistema deve exibir "<resultado>"
+
+Exemplos:
+| Quantidade | Resultado                         |
+| 1          | Quantidade aceita                 |
+| 10         | Quantidade aceita                 |
+| 11         | Limite máximo de 10 produtos      |
+
+Cenário: Limpar configurações
+    Dado que o cliente selecionou cor, tamanho e quantidade
+    Quando clica no botão "Limpar"
+    Então o produto deve voltar ao estado original
